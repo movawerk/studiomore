@@ -1,0 +1,4 @@
+import { NewsPage } from "@/components/pages/NewsPage";
+import { staticPageMetadata } from "@/lib/static-metadata";
+export const metadata = staticPageMetadata("news", "en");
+export default function Page() { return <NewsPage locale="en" />; }

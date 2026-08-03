@@ -1,0 +1,240 @@
+@import "tailwindcss";
+
+/*
+  studio more — "Constructed editorialism"
+  Palette derived from the office's drawing notation:
+  black = existing fabric, studio pink = new intervention, yellow = demolition/analysis.
+*/
+:root {
+  --paper: #f2f0ea;
+  --warm-white: #faf9f5;
+  --ink: #171716;
+  --stone: #a8a49b;
+  --intervention: #f0d4d6;
+  --intervention-ink: #805158;
+  --drawing-yellow: #d8b44a;
+  --deep-clay: #68483e;
+  --sand: #ded8ce;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-warm-white: var(--warm-white);
+  --color-ink: var(--ink);
+  --color-stone: var(--stone);
+  --color-intervention: var(--intervention);
+  --color-intervention-ink: var(--intervention-ink);
+  --color-drawing-yellow: var(--drawing-yellow);
+  --color-deep-clay: var(--deep-clay);
+  --color-sand: var(--sand);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-newsreader), ui-serif, Georgia, serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+a,
+button,
+input,
+select,
+textarea {
+  border-radius: 0;
+}
+
+a,
+button {
+  text-underline-offset: 0.2em;
+}
+
+button:not(:disabled),
+select {
+  cursor: pointer;
+}
+
+::selection {
+  background: var(--intervention);
+  color: var(--warm-white);
+}
+
+/* Visible focus for keyboard users */
+:focus-visible {
+  outline: 2px solid var(--intervention);
+  outline-offset: 2px;
+}
+
+/* Editorial display type */
+.font-display {
+  font-family: var(--font-newsreader), ui-serif, Georgia, serif;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.08;
+}
+
+/* Drawing-style metadata label */
+.meta-label {
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--stone);
+}
+
+/* Compact language index: part switch, part architectural drawing marker. */
+.language-switcher {
+  position: relative;
+  isolation: isolate;
+}
+
+.language-switcher::before,
+.language-switcher::after {
+  content: "";
+  position: absolute;
+  left: -4px;
+  width: 8px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.5;
+}
+
+.language-switcher::before {
+  top: -1px;
+}
+
+.language-switcher::after {
+  bottom: -1px;
+}
+
+.language-switcher__option {
+  position: relative;
+  display: grid;
+  min-width: 2.75rem;
+  place-items: center;
+  padding: 0.38rem 0.55rem 0.34rem;
+  line-height: 1;
+}
+
+.language-switcher__option::after {
+  content: "";
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  width: 3px;
+  height: 3px;
+  background: currentColor;
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.language-switcher__option:hover::after,
+.language-switcher__option[aria-current="page"]::after {
+  opacity: 0.7;
+  transform: scale(1);
+}
+
+/* Horizontal drawing rule with tick marks, evoking dimension lines */
+.drawing-rule {
+  position: relative;
+  height: 1px;
+  background: color-mix(in srgb, var(--ink) 25%, transparent);
+}
+.drawing-rule::before,
+.drawing-rule::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  width: 1px;
+  height: 7px;
+  background: color-mix(in srgb, var(--ink) 45%, transparent);
+}
+.drawing-rule::before {
+  left: 0;
+}
+.drawing-rule::after {
+  right: 0;
+}
+
+/* Subtle scroll indicator */
+@keyframes nudge {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+.animate-nudge {
+  animation: nudge 2.4s ease-in-out infinite;
+}
+
+/* Homepage: technical drawing grids and exhibition-scale typography. */
+.architectural-grid {
+  background-image:
+    linear-gradient(to right, rgb(250 249 245 / 0.16) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(250 249 245 / 0.12) 1px, transparent 1px);
+  background-size: calc(100% / 12) 100%, 100% 4rem;
+}
+
+.material-grid {
+  background-image:
+    linear-gradient(to right, rgb(23 23 22 / 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(23 23 22 / 0.05) 1px, transparent 1px);
+  background-size: calc(100% / 12) 100%, 100% 5rem;
+}
+
+.outline-word {
+  color: transparent;
+  font-family: var(--font-newsreader), ui-serif, Georgia, serif;
+  font-weight: 500;
+  letter-spacing: -0.06em;
+  -webkit-text-stroke: 1px rgb(250 249 245 / 0.32);
+  user-select: none;
+}
+
+@keyframes hero-settle {
+  from {
+    opacity: 0.72;
+    transform: scale(1.035);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.hero-image {
+  animation: hero-settle 1.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.home-project-image {
+  transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1), filter 400ms ease;
+}
+
+.group:hover .home-project-image {
+  transform: scale(1.025);
+}
