@@ -156,6 +156,14 @@ select {
   transform: scale(1);
 }
 
+@media (max-width: 63.999rem) {
+  .language-switcher__option {
+    width: 3.75rem;
+    height: 3.75rem;
+    padding: 0;
+  }
+}
+
 /* Horizontal drawing rule with tick marks, evoking dimension lines */
 .drawing-rule {
   position: relative;

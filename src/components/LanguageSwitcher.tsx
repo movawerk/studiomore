@@ -19,7 +19,7 @@ export function LanguageSwitcher({
   return (
     <nav
       aria-label={t(ui.languageSwitch, locale)}
-      className={`language-switcher flex items-stretch border text-ink ${
+      className={`language-switcher flex w-fit self-start items-stretch border text-ink ${
         inverted ? "border-warm-white/45 text-warm-white" : "border-ink/25"
       } ${className}`}
     >
