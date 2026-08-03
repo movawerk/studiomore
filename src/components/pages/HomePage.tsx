@@ -78,7 +78,7 @@ export function HomePage({ locale }: { locale: Locale }) {
   return (
     <>
       {/* ------------------------------------------------------------ Hero */}
-      <section className="relative min-h-svh overflow-hidden bg-ink" aria-labelledby="hero-title">
+      <section className="relative h-svh min-h-0 overflow-hidden bg-ink" aria-labelledby="hero-title">
         <Image
           src={hero.src}
           alt={t(hero.alt, locale)}
@@ -93,28 +93,29 @@ export function HomePage({ locale }: { locale: Locale }) {
           more
         </div>
 
-        <div className="relative mx-auto flex min-h-svh w-full max-w-[1600px] flex-col px-4 pb-8 pt-28 sm:px-6 lg:px-10 lg:pb-10 lg:pt-32">
+        <div className="relative mx-auto flex h-svh min-h-0 w-full max-w-[1600px] flex-col px-4 pb-4 pt-20 sm:px-6 sm:pb-6 sm:pt-24 lg:px-10 lg:pb-10 lg:pt-32">
           <div className="grid grid-cols-12 border-t border-warm-white/35 pt-3 text-warm-white/70">
             <p className="meta-label !text-warm-white/70 col-span-8 sm:col-span-6">
-              {t(copy.featuredLabel, locale)} / {projectTitle(heroProject, locale)}
+              <span className="sm:hidden">{projectTitle(heroProject, locale)}</span>
+              <span className="hidden sm:inline">{t(copy.featuredLabel, locale)} / {projectTitle(heroProject, locale)}</span>
             </p>
             <p className="meta-label !text-warm-white/70 col-span-4 text-right sm:col-span-3 sm:col-start-10">
               01 / 06
             </p>
           </div>
 
-          <div className="mt-auto grid grid-cols-12 items-end gap-y-8 pb-10 pt-32 lg:gap-x-6 lg:pb-14">
+          <div className="home-hero__content mt-auto grid min-h-0 grid-cols-12 items-end gap-y-4 pb-4 pt-6 sm:gap-y-6 sm:pb-6 sm:pt-10 lg:gap-x-6 lg:pb-14 lg:pt-24">
             <div className="col-span-12 lg:col-span-9">
-              <p className="meta-label !text-drawing-yellow mb-5">
+              <p className="meta-label !text-drawing-yellow mb-3 sm:mb-5">
                 {heroProject.categories
                   .slice(0, 1)
                   .map((c) => t(projectCategoryLabels[c], locale))
                   .join("")}
-                {heroProject.location ? ` — ${t(heroProject.location, locale)}` : ""}
+                {heroProject.location ? <span className="hidden sm:inline"> — {t(heroProject.location, locale)}</span> : null}
               </p>
               <h1
                 id="hero-title"
-                className="font-display max-w-5xl text-[clamp(3.25rem,8.1vw,8rem)] leading-[0.87] text-warm-white"
+                className="font-display max-w-5xl text-[clamp(2.7rem,8.1vw,8rem)] leading-[0.87] text-warm-white"
               >
                 {locale === "de" ? (
                   <>Architektur, die<br /><span className="text-intervention">Bestehendes</span><br />weiterdenkt.</>
@@ -124,9 +125,9 @@ export function HomePage({ locale }: { locale: Locale }) {
               </h1>
             </div>
 
-            <div className="col-span-12 border-l border-warm-white/40 pl-4 sm:col-span-8 lg:col-span-3 lg:pl-6">
-              <p className="text-base leading-relaxed text-warm-white/85">{t(copy.heroSupport, locale)}</p>
-              <div className="mt-7 flex flex-col items-start gap-3">
+            <div className="home-hero__support col-span-12 border-l border-warm-white/40 pl-4 sm:col-span-8 lg:col-span-3 lg:pl-6">
+              <p className="home-hero__support-copy hidden text-sm leading-relaxed text-warm-white/85 sm:block sm:text-base">{t(copy.heroSupport, locale)}</p>
+              <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-1 lg:mt-7 lg:flex-col lg:items-start lg:gap-3">
                 <Link
                   href={href("contact", locale)}
                   className="group inline-flex items-center gap-3 border border-intervention bg-intervention px-5 py-3 font-medium text-ink transition-colors hover:bg-transparent hover:text-warm-white"
@@ -135,7 +136,7 @@ export function HomePage({ locale }: { locale: Locale }) {
                 </Link>
                 <Link
                   href={href("projects", locale)}
-                  className="inline-flex items-center gap-3 py-2 text-sm font-medium text-warm-white underline decoration-warm-white/40 underline-offset-4 transition-colors hover:text-intervention"
+                  className="hidden items-center gap-3 py-2 text-sm font-medium text-warm-white underline decoration-warm-white/40 underline-offset-4 transition-colors hover:text-intervention sm:inline-flex"
                 >
                   {t(ui.discoverProjects, locale)}
                 </Link>

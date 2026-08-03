@@ -164,6 +164,18 @@ select {
   }
 }
 
+@media (max-width: 63.999rem) and (max-height: 42rem) {
+  .home-hero__support-copy {
+    display: none;
+  }
+
+  .home-hero__content {
+    row-gap: 0.75rem;
+    padding-top: 1rem;
+    padding-bottom: 0.75rem;
+  }
+}
+
 /* Horizontal drawing rule with tick marks, evoking dimension lines */
 .drawing-rule {
   position: relative;

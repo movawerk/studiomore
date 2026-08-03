@@ -76,13 +76,20 @@ export function SiteHeader({ locale }: { locale: Locale }) {
         solid ? "border-b border-ink/10 bg-paper" : "bg-transparent"
       }`}
     >
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:h-20 lg:px-8">
+      <div className="relative z-50 mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:h-20 lg:px-8">
         <Link
           href={href("home", locale)}
-          className={`font-display text-xl tracking-tight transition-colors lg:text-2xl ${onHero ? "text-warm-white" : "text-ink"}`}
+          onClick={() => {
+            setOpen(false);
+            if (isHome) {
+              window.requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: "smooth" }));
+            }
+          }}
+          className={`inline-flex flex-col items-center font-display text-[1.55rem] leading-[0.72] tracking-tight transition-colors sm:text-[1.7rem] lg:text-[1.8rem] ${onHero ? "text-warm-white" : "text-ink"}`}
           aria-label={`studio more – ${t(ui.home, locale)}`}
         >
-          studio<span className={onHero ? "text-intervention" : "text-intervention-ink"}>&nbsp;more</span>
+          <span>studio</span>
+          <span className={onHero ? "text-intervention" : "text-intervention-ink"}>more</span>
         </Link>
 
         {/* Desktop navigation */}
@@ -126,26 +133,26 @@ export function SiteHeader({ locale }: { locale: Locale }) {
         <div
           ref={menuRef}
           id={menuId}
-          className="fixed inset-0 top-16 z-40 flex flex-col overflow-y-auto bg-paper px-6 pb-10 pt-6 lg:hidden"
+          className="fixed inset-x-0 bottom-0 top-16 z-40 flex h-[calc(100svh-4rem)] flex-col overflow-hidden bg-paper px-6 pb-[clamp(1rem,3svh,2.5rem)] pt-[clamp(0.75rem,2svh,1.5rem)] lg:hidden"
         >
-          <nav aria-label={t(ui.mainNavigation, locale)} className="flex flex-col gap-1">
+          <nav aria-label={t(ui.mainNavigation, locale)} className="flex min-h-0 flex-1 flex-col justify-center">
             {NAV_ITEMS.map((item, i) => (
               <Link
                 key={item.key}
                 href={href(item.key, locale)}
                 onClick={() => setOpen(false)}
-                className="border-b border-ink/10 py-4 font-display text-3xl text-ink transition-colors hover:text-intervention"
+                className="flex min-h-0 max-h-[4.75rem] flex-1 items-center border-b border-ink/10 py-[clamp(0.45rem,1.5svh,1rem)] font-display text-[clamp(1.65rem,4.2svh,3rem)] leading-none text-ink transition-colors hover:text-intervention"
               >
                 <span className="meta-label mr-3">{String(i + 1).padStart(2, "0")}</span>
                 {t(item.label, locale)}
               </Link>
             ))}
           </nav>
-          <div className="mt-8 flex flex-col gap-6">
+          <div className="mt-[clamp(1rem,2.5svh,2rem)] flex shrink-0 flex-wrap items-end gap-4">
             <Link
               href={href("contact", locale)}
               onClick={() => setOpen(false)}
-              className="inline-flex w-fit border border-ink bg-intervention px-6 py-3 font-medium text-ink"
+              className="inline-flex min-h-15 w-fit items-center border border-ink bg-intervention px-6 py-3 font-medium text-ink"
             >
               {t(nav.cta, locale)}
             </Link>
